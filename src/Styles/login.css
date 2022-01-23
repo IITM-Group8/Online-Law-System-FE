@@ -1,0 +1,93 @@
+
+form {
+    border: 3px solid #f1f1f1;
+    background-color: white;  
+    width: 35%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto; 
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.user-icon {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.login-container {
+    padding: 16px;
+    background: rgb(37 89 92);
+}
+
+.login-container label{
+    color: rgba(255,255,255,1);
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;    
+}
+
+span.psw a{
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+}
+
+span.psw a:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+#expertizeHide{
+    display: none;
+}
+
+#expertizeShow{
+    display: block;
+}
