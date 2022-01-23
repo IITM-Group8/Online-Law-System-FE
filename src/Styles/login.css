@@ -1,5 +1,5 @@
 
-form {
+.form-container {
     border: 3px solid #f1f1f1;
     background-color: white;  
     width: 35%;
@@ -90,4 +90,10 @@ span.psw a:hover{
 
 #expertizeShow{
     display: block;
+}
+
+.login-error{
+    color: #f44336;
+    font-size: 17px;
+    font-weight: bold
 }

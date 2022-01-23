@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
 
+import * as CommonConstants from '../Constants/CommonConstants.js'
 import '../Styles/home.css';
 import '../Styles/login.css';
 import LawLogo from '../Images/law_logo3.jpg';
@@ -30,12 +32,14 @@ class Header extends Component {
             Expertize: '',
             isSignInFormOpen: false,
             isSignUpFormOpen: false,
-            expertizeId: 'expertizeHide'            
+            expertizeId: 'expertizeHide',
+            userDetails: undefined,
+            errorMessage: ''
         }
     }
 
     render() {
-        const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId } = this.state;
+        const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage } = this.state;
         return (
             <>
                 <div class="container">
@@ -54,7 +58,7 @@ class Header extends Component {
                 </div>
 
                 <Modal isOpen={isSignInFormOpen} style={customStyle} ariaHideApp={false}>
-                    <form action="#">
+                    <form class = "form-container" action="#">
                         <div class="imgcontainer">
                             <img src={UserIcon} class="user-icon" />
                             <h1>Login</h1>
@@ -64,7 +68,8 @@ class Header extends Component {
                             <input type="text" value={Email} placeholder="Enter Email" onChange={(event) => this.handleChange(event, 'Email')} required />
                             <label><b>Password</b></label>
                             <input type="password" value={Password} placeholder="Enter Password" onChange={(event) => this.handleChange(event, 'Password')} required />
-                            <button type="submit">Login</button>
+                            <button type="submit" onClick={this.signInHandler}>Login</button>
+                            {errorMessage && <div class="login-error"> {errorMessage} </div>}
                         </div>
                         <div class="login-container">
                             <button type="button" class="cancelbtn" onClick={this.signInCancelHandler}>Cancel</button>
@@ -123,7 +128,7 @@ class Header extends Component {
         this.setState({
             [stateVariable]: event.target.value
         });
-        if (event.target.value == 'Lawyer') {
+        if (event.target.value === 'Lawyer') {
             this.setState({
                 expertizeId: 'expertizeShow'
             });
@@ -146,7 +151,8 @@ class Header extends Component {
         this.setState({
             Email: '',
             Password: '',
-            isSignInFormOpen: false
+            isSignInFormOpen: false,
+            errorMessage: ''
         });
     }
 
@@ -163,7 +169,54 @@ class Header extends Component {
             Pincode: '',
             Expertize: '',
             isSignUpFormOpen: false,
-            expertizeId: 'expertizeHide'        
+            expertizeId: 'expertizeHide'
+        });
+    }
+
+    signInHandler = () => {
+        console.log("signInHandler begins");
+        const { Email, Password } = this.state;
+        if(!Email || !Password){
+            console.log("User credentials are missing");
+            this.setState({
+                errorMessage: 'Invalid Credentials'
+            });
+            return;
+        }
+        const request = {
+            email: Email,
+            password: Password
+        }
+        const url = CommonConstants.ONLINE_LAW_SYSTEM_MS_HOST + CommonConstants.ONLINE_LAW_SYSTEM_MS_PORT + CommonConstants.LOGIN_USER;
+        console.log("Login User url : ", url);
+        axios({
+            method: CommonConstants.POST,
+            url: url,
+            headers: { 'Content-Type' : 'application/json' },
+            data: request,
+        }).then(result => {
+            const userData = result.data;
+            this.setState({
+                userDetails: userData
+            });
+            if(userData.statusCode != 200){
+                var errMsg = 'Login Failed';
+                if(userData.message != null){
+                    errMsg = userData.message;
+                }
+                this.setState({
+                    errorMessage: errMsg
+                });
+            }else{
+                this.setState({
+                    errorMessage: ''
+                });
+                this.signInCancelHandler();
+            }            
+        }).catch(error => {
+            this.setState({
+                errorMessage: 'Login Failed. Please check your credentials.'
+            });          
         });
     }
 }
