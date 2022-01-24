@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 import * as CommonConstants from '../Constants/CommonConstants.js'
 import '../Styles/home.css';
@@ -34,12 +35,13 @@ class Header extends Component {
             isSignUpFormOpen: false,
             expertizeId: 'expertizeHide',
             userDetails: undefined,
-            errorMessage: ''
+            errorMessage: '',
+            userToken: ''
         }
     }
 
     render() {
-        const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage } = this.state;
+        const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage, userToken } = this.state;
         return (
             <>
                 <div class="container">
@@ -120,7 +122,8 @@ class Header extends Component {
 
     handleChange = (event, stateVariable) => {
         this.setState({
-            [stateVariable]: event.target.value
+            [stateVariable]: event.target.value,
+            errorMessage: ''
         });
     }
 
@@ -196,8 +199,10 @@ class Header extends Component {
             data: request,
         }).then(result => {
             const userData = result.data;
+            const uDet = userData.userDetails;
             this.setState({
-                userDetails: userData
+                userToken: userData.token,
+                userDetails: uDet
             });
             if(userData.statusCode != 200){
                 var errMsg = 'Login Failed';
@@ -212,6 +217,14 @@ class Header extends Component {
                     errorMessage: ''
                 });
                 this.signInCancelHandler();
+                console.log("navigating to dashboard");
+                <Navigate to = "/dashboard" />
+                // <Navigate to = {{
+                //     pathname: "/dashboard",
+                //     state: {
+                //         userDetails: uDet
+                //     }
+                // }} />
             }            
         }).catch(error => {
             this.setState({

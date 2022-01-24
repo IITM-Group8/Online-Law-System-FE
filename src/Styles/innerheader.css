@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    background: rgb(37 89 92);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo {
+    height: 100px;
+    margin: 0px 10px;
+}
+
+.logo img {
+    position: absolute;
+    width: 80px;
+    height: 50%;
+    margin-top: 25px;
+}
+
+.logo p {
+    text-align: center;
+    font-size: 50px;
+    padding: 0px 51px 0px 0px;
+    width: 90%;
+    color: rgba(255, 255, 255, 1);
+    margin-left: 25%;
+}
+
+.user-container {
+    padding: 15px 0px 15px 15px;
+    float: right;
+    margin-top: -10px;
+}
+
+.user-name {
+    color: rgba(255, 255, 255, 1);
+    font-family: Roboto;
+    font-size: 15px;
+    opacity: 1;
+    padding: 10px 10px 10px 10px;
+    background: rgb(37 89 92);
+    cursor: pointer;
+}
+
+.user-container #user-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.arrow-span {
+    background: rgba(255, 255, 255, 1);
+}
+
+#expand-down-arrow {
+    margin: 5px 10px 0px 0px;
+    height: 15px;
+    width: 20px;
+}
