@@ -20,6 +20,15 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+select{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
@@ -92,8 +101,14 @@ span.psw a:hover{
     display: block;
 }
 
-.login-error{
+.error-msg{
     color: #f44336;
+    font-size: 17px;
+    font-weight: bold
+}
+
+.success-msg{
+    color: #4CAF50;
     font-size: 17px;
     font-weight: bold
 }

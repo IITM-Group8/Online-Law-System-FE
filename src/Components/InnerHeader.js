@@ -1,6 +1,9 @@
 import { Component } from 'react';
 
 import '../Styles/innerheader.css';
+import LawLogo from '../Images/law_logo3.jpg';
+import UserIcon from '../Images/User-Icon.png';
+import DownArrow from '../Images/expand-down-arrow.png';
 
 
 class InnerHeader extends Component {
@@ -11,18 +14,18 @@ class InnerHeader extends Component {
     }
 
     render() {
-        const { } = this.state;
+        // const { } = this.state;
         return (
             <>
                 <div class="container">
                     <div class="user-container">
                         <span class="user-name">
-                            <img id="user-icon" src="Images/User-Icon.png" /> Amalesh Ramasubbu
-                            <img id="expand-down-arrow" src="Images/expand-down-arrow.png" />
+                            <img id="user-icon" src= {UserIcon} alt='Not Found' /> Amalesh Ramasubbu
+                            <img id="expand-down-arrow" src= {DownArrow} alt='Not Found' />
                         </span>
                     </div>
                     <div class="logo">
-                        <img src="Images/law_logo3.jpg" />
+                        <img src= {LawLogo} alt='Not Found' />
                     </div>
                 </div>
 
