@@ -1,5 +1,8 @@
 import { Component } from 'react';
 
+import * as FiIcons from 'react-icons/fi';
+import * as RiIcons from 'react-icons/ri';
+
 import '../Styles/innerheader.css';
 import LawLogo from '../Images/law_logo3.jpg';
 import UserIcon from '../Images/User-Icon.png';
@@ -8,23 +11,26 @@ import DownArrow from '../Images/expand-down-arrow.png';
 
 class InnerHeader extends Component {
 
-    constructor() {
-        super();
-        this.state = {}
+    constructor(props) {
+        super(props);
+        console.log("User name in Inner header: ", props.name);
+        this.state = {
+            userName: props.name
+        }
     }
 
     render() {
-        // const { } = this.state;
+        const { userName } = this.state;
         return (
             <>
-                <div class="container">
-                    <div class="user-container">
-                        <span class="user-name">
-                            <img id="user-icon" src= {UserIcon} alt='Not Found' /> Amalesh Ramasubbu
-                            <img id="expand-down-arrow" src= {DownArrow} alt='Not Found' />
+                <div className="inner-header-container">
+                    <div className="user-container">
+                        <span className="user-name">
+                            <FiIcons.FiUser /> {userName}
+                            <RiIcons.RiArrowDropDownLine />
                         </span>
                     </div>
-                    <div class="logo">
+                    <div className="logo">
                         <img src= {LawLogo} alt='Not Found' />
                     </div>
                 </div>

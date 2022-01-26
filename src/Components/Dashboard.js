@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom'
 
 import '../Styles/innerheader.css';
 import InnerHeader from '../Components/InnerHeader'
 import Navbar from '../Components/Navbar'
 
-class Dashboard extends Component {
+function Dashboard(){
 
-    constructor(props){
-        super(props);
-        const userDetails = this.state;
-        console.log("prop value in Dashboard ", props.location.state);
-    }
+    let location = useLocation();
+    const locationState = location.state;
+    console.log("location state: ", locationState);
+    
+    const userName = locationState.name;
+    console.log("userName in Dashboard: ", userName);
 
-    render() {
-        console.log("inside Dashboard.js");
-        return (
-            <React.Fragment>
-                <InnerHeader />
-                <Navbar />
-            </React.Fragment>
-        );
-    }
+    return (
+        <React.Fragment>
+            <InnerHeader userName = {userName} />
+            <Navbar />            
+        </React.Fragment>
+    );    
 }
 
 export default Dashboard;

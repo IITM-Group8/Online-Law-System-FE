@@ -33,71 +33,66 @@ class Header extends Component {
             isSignInFormOpen: false,
             isSignUpFormOpen: false,
             expertizeId: 'expertizeHide',
-            userDetails: undefined,
+            userDetails: {},
             errorMessage: '',
             successMessage: '',
-            userToken: '',
             toRedirect: false
         }
     }
 
     render() {
-        const { Name, Email, Password, Mobile, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage, successMessage, userToken, toRedirect} = this.state;
+        const { Name, Email, Password, Mobile, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage, successMessage, toRedirect } = this.state;
+        
         return (
             <>
-                <div class="container">
-                    <div class="sign_container">
-                        <span class="signspan" id="login" onClick={this.loginOpenHandler}>LOGIN</span>
-                        <span class="signspan" id="signup" onClick={this.signUpOpenHandler}>SIGN UP</span>
+                <div className="container">
+                    <div className="sign_container">
+                        <span className="signspan" id="login" onClick={this.loginOpenHandler}>LOGIN</span>
+                        <span className="signspan" id="signup" onClick={this.signUpOpenHandler}>SIGN UP</span>
                     </div>
-                    <div class="logo">
-                        <img src={LawLogo} alt='Not found'/>
+                    <div className="logo">
+                        <img src={LawLogo} alt='Not found' />
                         <p>Online Law System</p>
                     </div>
-                    <div class="options">
-                        <span class="option_span" id="home">Home</span>
-                        <span class="option_span" id="aboutus">About Us</span>
+                    <div className="options">
+                        <span className="option_span" id="home">Home</span>
+                        <span className="option_span" id="aboutus">About Us</span>
                     </div>
                 </div>
 
                 <Modal isOpen={isSignInFormOpen} style={customStyle} ariaHideApp={false}>
-                    <div class="form-container" >
-                        <div class="imgcontainer">
-                            <img src={UserIcon} alt='Not found' class="user-icon" />
+                    <div className="form-container" >
+                        <div className="imgcontainer">
+                            <img src={UserIcon} alt='Not found' className="user-icon" />
                             <h1>Login</h1>
                         </div>
-                        <div class="login-container">
+                        <div className="login-container">
                             <label><b>Email</b></label>
                             <input type="text" value={Email} placeholder="Enter Email" onChange={(event) => this.handleChange(event, 'Email')} required />
                             <label><b>Password</b></label>
                             <input type="password" value={Password} placeholder="Enter Password" onChange={(event) => this.handleChange(event, 'Password')} required />
                             <button type="submit" onClick={this.signInHandler} >Login</button>
-                            {errorMessage && <div class="error-msg"> {errorMessage} </div>}
+                            {errorMessage && <div className="error-msg"> {errorMessage} </div>}
                         </div>
-                        <div class="login-container">
-                            <button type="button" class="cancelbtn" onClick={this.signInCancelHandler}>Cancel</button>
-                            <span class="psw"><a href="#">Forgot Password?</a></span>
+                        <div className="login-container">
+                            <button type="button" className="cancelbtn" onClick={this.signInCancelHandler}>Cancel</button>
+                            <span className="psw"><a href="#">Forgot Password?</a></span>
                         </div>
                     </div>
                 </Modal>
 
-                <Modal isOpen={toRedirect} ariaHideApp={false}>
-                    <Navigate to={{
-                        pathname: "/dashboard",
-                        state: {
-                            userDetails: userDetails
-                        }
-                    }} userDetails = {userDetails}/>
+                <Modal isOpen={toRedirect} ariaHideApp={false} >
+                <Navigate to= "/dashboard" replace={true} state = {userDetails}/>                                    
                 </Modal>
 
                 <Modal isOpen={isSignUpFormOpen} style={customStyle} ariaHideApp={false}>
-                    <div class="form-container">
-                        <div class="imgcontainer">
-                            <img src={UserIcon} class="user-icon" alt='Not Found'/>
+                    <div className="form-container">
+                        <div className="imgcontainer">
+                            <img src={UserIcon} className="user-icon" alt='Not Found' />
                             <h1>Sign Up</h1>
                         </div>
-                        <div class="error-msg"> All Fields are Mandatory </div>
-                        <form action="#" class="login-container">
+                        <div className="error-msg"> All Fields are Mandatory </div>
+                        <form action="#" className="login-container">
                             <label><b>Name</b></label>
                             <input type="text" value={Name} placeholder="Enter Full Name" onChange={(event) => this.handleChange(event, 'Name')} required />
                             <label><b>Email</b></label>
@@ -125,11 +120,11 @@ class Header extends Component {
                                 <input type="text" value={Expertize} placeholder="Enter Lawyer's Expertize" onChange={(event) => this.handleChange(event, 'Expertize')} required />
                             </div>
                             <button type="submit" onClick={this.signUpHandler}>Sign Up</button>
-                            {errorMessage && <div class="error-msg"> {errorMessage} </div>}
-                            {successMessage && <div class="success-msg"> {successMessage} </div>}
+                            {errorMessage && <div className="error-msg"> {errorMessage} </div>}
+                            {successMessage && <div className="success-msg"> {successMessage} </div>}
                         </form>
-                        <div class="login-container">
-                            <button type="button" class="cancelbtn" onClick={this.signUpCancelHandler}>Cancel</button>
+                        <div className="login-container">
+                            <button type="button" className="cancelbtn" onClick={this.signUpCancelHandler}>Cancel</button>
                         </div>
                     </div>
                 </Modal>
@@ -222,12 +217,8 @@ class Header extends Component {
             data: request,
         }).then(result => {
             const userData = result.data;
-            const uDet = userData.userDetails;
-            this.setState({
-                userToken: userData.token,
-                userDetails: uDet
-            });
             if (userData.statusCode !== 200) {
+                console.log("Login failed for ", userData.name);
                 var errMsg = 'Login Failed';
                 if (userData.message != null) {
                     errMsg = userData.message;
@@ -236,14 +227,22 @@ class Header extends Component {
                     errorMessage: errMsg
                 });
             } else {
+                console.log("Login success for ", userData.name);
+                const uDet = {
+                    email: userData.email,
+                    name: userData.name,
+                    userId: userData.userId,
+                    role: userData.role,
+                    userToken: userData.token
+                }
                 this.setState({
+                    userToken: userData.token,
+                    userDetails: uDet,
                     errorMessage: '',
                     email: '',
                     password: '',
                     toRedirect: true
                 });
-
-                console.log("navigating to dashboard");
                 this.signInCancelHandler();
             }
         }).catch(error => {

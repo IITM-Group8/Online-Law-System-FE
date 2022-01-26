@@ -9,10 +9,12 @@
   }
   
   .container {
-    background: rgb(37 89 92);
+    background: rgba(255, 255, 255, 1);
     position: relative;
     overflow: hidden;
     padding: 25px;
+    border: solid 10px rgb(37 89 92);
+    border-radius: 5px;
   }
   
   .logo {
@@ -24,6 +26,7 @@
     position: absolute;
     width: 150px;
     height: 60%;  
+    margin-top: -25px;
   }
   
   .logo p {
@@ -31,13 +34,15 @@
     font-size: 50px;
     padding: 0px 51px 0px 0px;
     width: 90%;
-    color: rgba(255,255,255,1);
+    color: rgb(37 89 92);
     margin-left: 25%;
   }
   
   .sign_container {
     padding: 15px 100px 15px 100px;
     float: right;
+    margin-right: -10%;
+    margin-top: -2%
   }
   
   .signspan {
