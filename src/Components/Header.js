@@ -239,8 +239,8 @@ class Header extends Component {
                     userToken: userData.token,
                     userDetails: uDet,
                     errorMessage: '',
-                    email: '',
-                    password: '',
+                    Email: '',
+                    Password: '',
                     toRedirect: true
                 });
                 this.signInCancelHandler();

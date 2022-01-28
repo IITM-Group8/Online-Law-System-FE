@@ -2,7 +2,7 @@
     background-color: #060b26;
     height: 80px;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
   }
   
@@ -71,3 +71,34 @@
     margin-left: 16px;
   }
   
+  .user-container {
+    padding: 15px 0px 15px 15px;
+    float: right;    
+    position: relative;
+}
+
+.user-name {
+  color: rgba(255, 255, 255, 1);
+  font-family: Roboto;
+  font-size: 15px;
+  opacity: 1;
+  padding: 10px 10px 10px 10px;
+  /* background: rgb(37 89 92); */
+  cursor: pointer;
+}
+
+.menu-bars-container{
+  float: left;
+}
+
+#navbar-title{
+  color: rgba(255, 255, 255, 1);
+  font-family: Roboto;
+  text-align: center;
+}
+
+.user-name label{
+  padding: 5px 20px 10px 10px;
+  display: flex;
+  cursor: pointer;
+}

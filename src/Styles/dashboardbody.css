@@ -1,0 +1,30 @@
+.dashboard-body-container{
+    justify-content: center;
+    display: flex;
+    margin-top: 10rem;
+}
+
+.search-container{
+    justify-content: center;
+    display: grid;
+}
+
+.search-user-title{
+    margin-bottom: 2rem;;
+}
+
+.dashboard-form-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.dashboard-select Select{
+    border: solid;
+}
+.paper-container{
+    justify-content: center;
+    display: grid;
+    margin: 5rem 2rem 0 16rem;
+}
