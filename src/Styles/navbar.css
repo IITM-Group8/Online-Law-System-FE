@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #060b26;
+    background-color: #020104;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -13,7 +13,7 @@
   }
   
   .nav-menu {
-    background-color: #060b26;
+    background-color: #020104;
     width: 250px;
     height: 100vh;
     display: flex;
@@ -51,7 +51,7 @@
   }
   
   .nav-text a:hover {
-    background-color: #1a83ff;
+    background-color: #094e9c;
   }
   
   .nav-menu-items {
@@ -59,7 +59,7 @@
   }
   
   .navbar-toggle {
-    background-color: #060b26;
+    background-color: #020104;
     width: 100%;
     height: 80px;
     display: flex;
@@ -79,7 +79,6 @@
 
 .user-name {
   color: rgba(255, 255, 255, 1);
-  font-family: Roboto;
   font-size: 15px;
   opacity: 1;
   padding: 10px 10px 10px 10px;
@@ -93,7 +92,6 @@
 
 #navbar-title{
   color: rgba(255, 255, 255, 1);
-  font-family: Roboto;
   text-align: center;
 }
 

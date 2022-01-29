@@ -41,6 +41,16 @@ function UserDetailsView(props) {
     };
 
     const rows = props.listOfUserDetails;
+    const [noOfRowsPerPage, setNoOfRowsPerPage] = React.useState([]);
+    if(rows.length >= 100){
+        setNoOfRowsPerPage([10, 25, 50, 100])
+    }else if(rows.length >= 50){
+        setNoOfRowsPerPage([10, 25, 50])
+    }else if(rows.length >= 25){
+        setNoOfRowsPerPage([10, 25])
+    }else if(rows.length >= 10){
+        setNoOfRowsPerPage([10])
+    }
 
     return (
         <div className='paper-container'  >
@@ -83,7 +93,7 @@ function UserDetailsView(props) {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
+                rowsPerPageOptions={noOfRowsPerPage}
                 component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}

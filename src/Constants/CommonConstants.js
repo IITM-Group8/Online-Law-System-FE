@@ -7,6 +7,10 @@ export const GET = 'GET'
 export const ADMIN = 'Admin'
 export const LAWYER = 'Lawyer'
 export const PUBLIC = 'Public'
+export const USER_NAME = 'User Name'
+export const USER_ROLE = 'User Role'
+export const USER_EMAIL = 'User Email'
+export const USER_ID = 'User Id'
 
 export const LOGIN_USER = '/user/login';
 export const REGISTER_USER = '/user/registerUser';

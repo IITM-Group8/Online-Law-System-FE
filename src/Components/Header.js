@@ -235,6 +235,10 @@ class Header extends Component {
                     role: userData.role,
                     userToken: userData.token
                 }
+                localStorage.setItem(CommonConstants.USER_NAME, userData.name);
+                localStorage.setItem(CommonConstants.USER_ROLE, userData.role);
+                localStorage.setItem(CommonConstants.USER_EMAIL, userData.email);
+                localStorage.setItem(CommonConstants.USER_ID, userData.userId);
                 this.setState({
                     userToken: userData.token,
                     userDetails: uDet,

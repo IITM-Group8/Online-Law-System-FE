@@ -17,68 +17,62 @@ class SearchUser extends Component {
             Status: '',
             errorMessage: '',
             listOfUserDetails: undefined,
-            searchSection: props.searchSection,
-            displayUserDetails: props.displayUserDetails,
+            displayUserDetails: false,
             shouldAllowComponentToUpdate: true
         }
     }
 
-    componentDidMount(){
-        
-    }
-   
     render() {
-        const { errorMessage, searchSection, displayUserDetails, listOfUserDetails } = this.state;
-        console.log("render with state ", this.state);      
+        const { errorMessage, displayUserDetails, listOfUserDetails } = this.state;
+        console.log("render with state ", this.state);
         return (
             <>
-                {
-                    searchSection ?
-                        <div className='search-container'>
-                            <div className='search-user-title'>
-                                <h1>Search User</h1>
-                            </div>
-                            <div className='dashboard-form-container' >
-                                <span className='dashboard-select'>
-                                    <Select
-                                        name="role"
-                                        modalCloseButton={<ModalCloseButton />}
-                                        options={[
-                                            { value: '', text: 'Select User Role' },
-                                            { value: 'Public', text: 'Public' },
-                                            { value: 'Lawyer', text: 'Lawyer' }
-                                        ]}
-                                        caretIcon={<CaretIcon />}
-                                        onChange={(event) => this.handleChange(event, 'Role')}
-                                        required
-                                    />
-                                </span>
-                                <span className='dashboard-select'>
-                                    <Select
-                                        name="status"
-                                        modalCloseButton={<ModalCloseButton />}
-                                        options={[
-                                            { value: '', text: 'Select User Status' },
-                                            { value: 'New', text: 'New' },
-                                            { value: 'Active', text: 'Active' },
-                                            { value: 'InActive', text: 'InActive' }
-                                        ]}
-                                        caretIcon={<CaretIcon />}
-                                        onChange={(event) => this.handleChange(event, 'Status')}
-                                    />
-                                </span>
-                                <button type='submit' onClick={this.searchUser} >
-                                    Submit
-                                </button>
-                                {errorMessage && <div className="error-msg"> {errorMessage} </div>}
-                            </div>
-                        </div> :
-                        <></>
-                }
+                <div className='search-container'>
+                    <div className='search-user-title'>
+                        <h1>Search User</h1>
+                    </div>
+                    <div className='dashboard-form-container' >
+                        <span className='dashboard-select'>
+                            <Select
+                                name="role"
+                                modalCloseButton={<ModalCloseButton />}
+                                options={[
+                                    { value: '', text: 'Select User Role' },
+                                    { value: 'Public', text: 'Public' },
+                                    { value: 'Lawyer', text: 'Lawyer' }
+                                ]}
+                                caretIcon={<CaretIcon />}
+                                onChange={(event) => this.handleChange(event, 'Role')}
+                                required
+                            />
+                        </span>
+                        <span className='dashboard-select'>
+                            <Select
+                                name="status"
+                                modalCloseButton={<ModalCloseButton />}
+                                options={[
+                                    { value: '', text: 'Select User Status' },
+                                    { value: 'New', text: 'New' },
+                                    { value: 'Active', text: 'Active' },
+                                    { value: 'InActive', text: 'InActive' }
+                                ]}
+                                caretIcon={<CaretIcon />}
+                                onChange={(event) => this.handleChange(event, 'Status')}
+                            />
+                        </span>
+                        <button type='submit' onClick={this.searchUser} >
+                            Submit
+                        </button>
+                        {errorMessage && <div className="error-msg"> {errorMessage} </div>}
+                    </div>
+                </div>
 
                 {
                     displayUserDetails ?
-                    <UserDetailsView listOfUserDetails = {listOfUserDetails} />                        
+                    <>
+                        <UserDetailsView listOfUserDetails={listOfUserDetails} />
+                        <button type="button" className="search-user-cancelbtn" onClick={this.closeUserDetailsSection} >Close</button>
+                      </>  
                         : <></>
                 }
 
@@ -90,6 +84,12 @@ class SearchUser extends Component {
         this.setState({
             [stateVariable]: event.value,
             errorMessage: ''
+        });
+    }
+
+    closeUserDetailsSection = () => {
+        this.setState({
+            displayUserDetails: false
         });
     }
 
@@ -113,7 +113,7 @@ class SearchUser extends Component {
         }).then(result => {
             const userData = result.data;
             if (userData.statusCode !== 200) {
-                console.log("Falied to fetch user details ");
+                console.log("Failed to fetch user details ");
                 var errMsg = 'User Details Not Found';
                 if (userData.message != null) {
                     errMsg = userData.message;
@@ -125,11 +125,8 @@ class SearchUser extends Component {
                 console.log("User details found ");
                 this.setState({
                     listOfUserDetails: userData.userDetails,
-                    searchSection: false,
                     displayUserDetails: true,
                     errorMessage: '',
-                    Role: '',
-                    Status: '',
                     shouldAllowComponentToUpdate: false
                 });
             }

@@ -16,9 +16,7 @@ import SearchUser from './SearchUser.js';
 function Navbar(props) {
   const userName = props.userName;
   const role = props.role;
-  console.log("User name in Navbar: and role: ", userName, role);
-
-  var isMenuList = true;
+  
   var menuList = [];
   if (role === 'Admin') {
     menuList = CommonConstants.LIST_OF_MENUS_FOR_ADMIN;
@@ -33,7 +31,6 @@ function Navbar(props) {
 
   const [displayState, setDisplayState] = useState('dashboardbody');
   const displayPage = (stateName) => {
-    console.log("stateName : ", stateName);
     setDisplayState(stateName);
   }
 
@@ -42,7 +39,7 @@ function Navbar(props) {
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={() => showSidebar()} />
           </Link>
           <h2 id='navbar-title'>Law Management System</h2>
           <div className="user-container">
@@ -55,15 +52,15 @@ function Navbar(props) {
           </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
+          <ul className='nav-menu-items'>
             <li className='navbar-toggle'>
               <Link to='#' className='menu-bars'>
-                <AiIcons.AiOutlineClose />
+                <AiIcons.AiOutlineClose onClick={() => showSidebar()} />
               </Link>
             </li>
 
             {
-              isMenuList ?
+              menuList ?
                 menuList.map((item, index) => {
                   return (
                     <li key={index} className={item.cName}>
@@ -86,7 +83,7 @@ function Navbar(props) {
 
         {
           displayState === 'searchUsers' ?
-            <SearchUser searchSection = {true} displayUserDetails = {false} />
+            <SearchUser />
             : <></>
         }
 
