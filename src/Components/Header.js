@@ -42,7 +42,7 @@ class Header extends Component {
 
     render() {
         const { Name, Email, Password, Mobile, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage, successMessage, toRedirect } = this.state;
-        
+
         return (
             <>
                 <div className="container">
@@ -82,7 +82,7 @@ class Header extends Component {
                 </Modal>
 
                 <Modal isOpen={toRedirect} ariaHideApp={false} >
-                <Navigate to= "/dashboard" replace={true} state = {userDetails}/>                                    
+                    <Navigate to="/dashboard" replace={true} state={userDetails} />
                 </Modal>
 
                 <Modal isOpen={isSignUpFormOpen} style={customStyle} ariaHideApp={false}>
@@ -190,13 +190,18 @@ class Header extends Component {
             Expertize: '',
             isSignUpFormOpen: false,
             expertizeId: 'expertizeHide',
-            successMessage: ''
+            successMessage: '',
+            errorMessage: '',
         });
     }
 
     signInHandler = () => {
         console.log("signInHandler begins");
         const { Email, Password } = this.state;
+        this.setState({
+            errorMessage: '',
+            successMessage: ''
+        });
         if (!Email || !Password) {
             console.log("User credentials are missing");
             this.setState({
@@ -264,6 +269,10 @@ class Header extends Component {
 
     signUpHandler = () => {
         console.log("signUpHandler begins");
+        this.setState({
+            errorMessage: '',
+            successMessage: ''
+        });
         const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize } = this.state;
         if (!Name || !Email || !Password || !Mobile || !Role || !Age || !Address || !City || !Pincode) {
             console.log("Mandatory fields are missing");
@@ -283,7 +292,7 @@ class Header extends Component {
             city: City,
             pincode: Pincode,
             expertize: Expertize
-        }
+        }        
         const url = CommonConstants.ONLINE_LAW_SYSTEM_MS_HOST + CommonConstants.ONLINE_LAW_SYSTEM_MS_PORT + CommonConstants.REGISTER_USER;
         console.log("Register User url : ", url);
         axios({
@@ -304,17 +313,16 @@ class Header extends Component {
             } else {
                 this.setState({
                     errorMessage: '',
-                    email: '',
-                    password: '',
-                    name: '',
-                    mobile_no: '',
-                    role: '',
-                    age: '',
-                    address: '',
-                    city: '',
-                    pincode: '',
-                    expertize: '',
-                    isSignUpFormOpen: true,
+                    Name: '',
+                    Email: '',
+                    Password: '',
+                    Mobile: '',
+                    Role: '',
+                    Age: '',
+                    Address: '',
+                    City: '',
+                    Pincode: '',
+                    Expertize: '',
                     successMessage: 'User Registered successfully'
                 });
             }

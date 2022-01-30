@@ -3,8 +3,8 @@ import { Select, CaretIcon, ModalCloseButton } from 'react-responsive-select';
 import 'react-responsive-select/dist/react-responsive-select.css';
 import axios from 'axios';
 
-import '../Styles/dashboardbody.css';
-import * as CommonConstants from '../Constants/CommonConstants.js'
+import '../../Styles/dashboardbody.css';
+import * as CommonConstants from '../../Constants/CommonConstants.js'
 import UserDetailsView from './UserDetailsView';
 
 class SearchUser extends Component {

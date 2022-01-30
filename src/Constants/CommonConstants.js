@@ -3,6 +3,7 @@ export const ONLINE_LAW_SYSTEM_MS_PORT = '5001';
 
 export const POST = 'POST'
 export const GET = 'GET'
+export const PUT = 'PUT'
 
 export const ADMIN = 'Admin'
 export const LAWYER = 'Lawyer'
@@ -14,11 +15,12 @@ export const USER_ID = 'User Id'
 
 export const LOGIN_USER = '/user/login';
 export const REGISTER_USER = '/user/registerUser';
-
 export const FETCH_USERS_BY_ROLE = '/user/usersByRole/';
-const UPDATE_USER_STATUS = '/user/userStatus';
+export const FETCH_IPC_LAWS = '/laws/ipcLaws/';
+export const UPDATE_USER_STATUS = '/user/userStatus';
+
 const SEARCH_LAWYER_DETAILS = '/user/lawyer/searchLawyer';
-const FETCH_IPC_LAWS = '/laws/ipcLaws';
+
 const UPDATE_IPC_LAWS = '/laws/ipcLaw';
 const FETCH_COURT_BY_AREA = '/court/courts/{area}';
 const UPDATE_COURT_DETAILS = '/court/courts';
@@ -31,110 +33,94 @@ const GENERATE_REPORTS = '/reports/generateReports';
 export const LIST_OF_MENUS_FOR_ADMIN = [
     {
         title: 'Search Users',
-        path: FETCH_USERS_BY_ROLE,
         cName: "nav-text",
-        stateName: 'searchUsers',
-        setStateName: 'setSearchUsers'
+        stateName: 'searchUsers'
     },
     {
         title: 'Update User Status',
-        path: UPDATE_USER_STATUS,
         cName: "nav-text",
-        stateName: 'updateUserStatus',
-        setStateName: 'setUpdateUserStatus'
+        stateName: 'updateUserStatus'
     },
     {
         title: 'IPC Laws',
-        path: FETCH_IPC_LAWS,
         cName: "nav-text",
-        stateName: 'ipcLaw',
-        setStateName: 'setIpcLaw'
+        stateName: 'ipcLaw'
     },
     {
         title: 'Update IPC Laws',
-        path: UPDATE_IPC_LAWS,
         cName: "nav-text",
-        stateName: 'updateIpcLaws',
-        setStateName: 'setUpdateIpcLaws'
+        stateName: 'updateIpcLaws'
     },
     {
         title: 'List out Court',
-        path: FETCH_COURT_BY_AREA,
         cName: "nav-text",
-        stateName: 'courtByArea',
-        setStateName: 'setCourtByArea'
+        stateName: 'courtByArea'
     },
     {
         title: 'Update Court Details',
-        path: UPDATE_COURT_DETAILS,
         cName: "nav-text",
-        stateName: 'updateCourtDet',
-        setStateName: 'setUpdateCourtDet'
+        stateName: 'updateCourtDet'
     },
     {
         title: 'View Case Status',
-        path: VIEW_A_CASE_STATUS,
         cName: "nav-text",
-        stateName: 'viewCaseDet',
-        setStateName: 'setViewCaseDet'
+        stateName: 'viewCaseDet'
     },
     {
         title: 'Generate Reports',
-        path: GENERATE_REPORTS,
         cName: "nav-text",
-        stateName: 'generateReports',
-        setStateName: 'setGenerateReports'
+        stateName: 'generateReports'
     }
 ];
 
 export const LIST_OF_MENUS_FOR_LAWYER = [
     {
         title: 'IPC Laws',
-        path: FETCH_IPC_LAWS,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'ipcLaw'
     },
     {
         title: 'List out Court',
-        path: FETCH_COURT_BY_AREA,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'courtByArea'
     },
     {
         title: 'View Case Status',
-        path: VIEW_A_CASE_STATUS,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'viewCaseDet'
     },
     {
         title: 'File a Case',
-        path: FILE_A_CASE_BY_LAWYER,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'fileACase'
     }
 ];
 
 export const LIST_OF_MENUS_FOR_PUBLIC = [
     {
         title: 'IPC Laws',
-        path: FETCH_IPC_LAWS,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'ipcLaw'
     },
     {
         title: 'List out Court',
-        path: FETCH_COURT_BY_AREA,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'courtByArea'
     },
     {
         title: 'Search Lawyers',
-        path: SEARCH_LAWYER_DETAILS,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'searchLawyers'
     },
     {
         title: 'View Case Status',
-        path: VIEW_A_CASE_STATUS,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'courtByArea'
     },
     {
         title: 'File a Case',
-        path: FILE_A_CASE_BY_PUBLIC,
-        cName: "nav-text"
+        cName: "nav-text",
+        stateName: 'fileACase'
     }
 ];
 

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-
-import * as CommonConstants from '../Constants/CommonConstants.js'
 
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as FiIcons from 'react-icons/fi';
 
-import '../Styles/navbar.css';
-import DashboardBody from './DashboardBody.js';
-import SearchUser from './SearchUser.js';
-
+import '../../Styles/navbar.css';
+import DashboardBody from './DashboardBody';
+import SearchUser from './SearchUser';
+import { LocalStorageService } from '../LocalStorageService';
+import * as CommonConstants from '../../Constants/CommonConstants.js'
+import IPCLaw from './IPCLaw';
 
 function Navbar(props) {
   const userName = props.userName;
@@ -34,6 +34,20 @@ function Navbar(props) {
     setDisplayState(stateName);
   }
 
+  const [isLogout, setIsLogout] = useState(false);
+  const logoutHandler = () => {
+    console.log("Logoff the user");
+    setDisplayState('');
+    setIsLogout(true);
+    LocalStorageService.removeLoginItems();
+  }  
+
+  if(isLogout){
+    return (
+      <Navigate to="/logout" replace={true} />
+    );
+}
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -46,7 +60,7 @@ function Navbar(props) {
             <span className="user-name">
               <label>
                 <FiIcons.FiUser /> {userName}</label>
-              <label id='logout-label'>
+              <label id='logout-label' onClick={() => logoutHandler()}>
                 <FiIcons.FiLogOut /> Logout</label>
             </span>
           </div>
@@ -87,11 +101,14 @@ function Navbar(props) {
             : <></>
         }
 
-
+        {
+          displayState === 'ipcLaw' ?
+            <IPCLaw />
+            : <></>
+        }
       </IconContext.Provider>
     </>
   );
-
 }
 
 

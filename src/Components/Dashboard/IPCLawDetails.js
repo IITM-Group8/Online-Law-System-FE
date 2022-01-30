@@ -8,26 +8,18 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import '../Styles/dashboardbody.css';
+import '../../Styles/dashboardbody.css';
 
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'email', label: 'Email', minWidth: 100 },
-    { id: 'mobile_no', label: 'Mobile No.', minWidth: 100 },
-    { id: 'role', label: 'Role', minWidth: 100 },
-    { id: 'age', label: 'Age', minWidth: 10 },
+    { id: 'section_no', label: 'IPC Section No.', minWidth: 100 },
     {
-        id: 'address',
-        label: 'Address',
-        minWidth: 150
-    },
-    { id: 'city', label: 'City', minWidth: 120 },
-    { id: 'pincode', label: 'Pinocde', minWidth: 100 },
-    { id: 'expertize', label: 'Expertize', minWidth: 100 },
-    { id: 'user_status', label: 'User Status', minWidth: 100 }
+        id: 'description',
+        label: 'Description',
+        minWidth: 500
+    }
 ];
 
-function UserDetailsView(props) {
+function IPCLawDetails(props) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -40,7 +32,7 @@ function UserDetailsView(props) {
         setPage(0);
     };
 
-    const rows = props.listOfUserDetails;
+    const rows = props.listOfIPCDetails;
     const [noOfRowsPerPage, setNoOfRowsPerPage] = React.useState([]);
     if(rows.length >= 100){
         setNoOfRowsPerPage([10, 25, 50, 100])
@@ -53,7 +45,7 @@ function UserDetailsView(props) {
     }
 
     return (
-        <div className='paper-container'  >
+        <div className='search-container' id='law-search-container' >
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
@@ -106,4 +98,4 @@ function UserDetailsView(props) {
     );
 }
 
-export default UserDetailsView;
+export default IPCLawDetails;

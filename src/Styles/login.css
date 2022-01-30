@@ -10,6 +10,13 @@
     margin: auto; 
 }
 
+.logout-form-container{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    margin-top: 10rem
+}
+
 input[type=text],
 input[type=password] {
     width: 100%;
