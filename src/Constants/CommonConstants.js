@@ -18,10 +18,9 @@ export const REGISTER_USER = '/user/registerUser';
 export const FETCH_USERS_BY_ROLE = '/user/usersByRole/';
 export const FETCH_IPC_LAWS = '/laws/ipcLaws/';
 export const UPDATE_USER_STATUS = '/user/userStatus';
+export const UPDATE_IPC_LAWS = '/laws/ipcLaw';
 
 const SEARCH_LAWYER_DETAILS = '/user/lawyer/searchLawyer';
-
-const UPDATE_IPC_LAWS = '/laws/ipcLaw';
 const FETCH_COURT_BY_AREA = '/court/courts/{area}';
 const UPDATE_COURT_DETAILS = '/court/courts';
 const VIEW_A_CASE_STATUS = '/case/caseDetails/{Case-Status}';
@@ -35,11 +34,6 @@ export const LIST_OF_MENUS_FOR_ADMIN = [
         title: 'Search Users',
         cName: "nav-text",
         stateName: 'searchUsers'
-    },
-    {
-        title: 'Update User Status',
-        cName: "nav-text",
-        stateName: 'updateUserStatus'
     },
     {
         title: 'IPC Laws',

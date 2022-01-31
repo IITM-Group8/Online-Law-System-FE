@@ -102,7 +102,7 @@ function UserDetailsView(props) {
             }
         }).catch(error => {
             const errData = error.response.data;
-            let errMsg = 'Failed to User status.';
+            let errMsg = 'Failed to update User status.';
             if (!errData.message) {
                 errMsg = errData.message;
             }

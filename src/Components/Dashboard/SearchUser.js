@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import { Select, CaretIcon, ModalCloseButton } from 'react-responsive-select';
 import 'react-responsive-select/dist/react-responsive-select.css';
 import axios from 'axios';
@@ -17,8 +18,7 @@ class SearchUser extends Component {
             Status: '',
             errorMessage: '',
             listOfUserDetails: undefined,
-            displayUserDetails: false,
-            shouldAllowComponentToUpdate: true
+            displayUserDetails: false
         }
     }
 
@@ -27,7 +27,7 @@ class SearchUser extends Component {
         console.log("render with state ", this.state);
         return (
             <>
-                <div className='search-container'>
+           <div className='search-container'>
                     <div className='search-user-title'>
                         <h1>Search User</h1>
                     </div>
@@ -95,6 +95,11 @@ class SearchUser extends Component {
 
     searchUser = () => {
         console.log("searchUser begins");
+        this.setState({
+            listOfUserDetails: [],
+            displayUserDetails: false,
+            errorMessage: ''
+        });
         const { Role, Status } = this.state;
         if (!Role || !Status) {
             console.log("Needed details are missing");
@@ -126,8 +131,7 @@ class SearchUser extends Component {
                 this.setState({
                     listOfUserDetails: userData.userDetails,
                     displayUserDetails: true,
-                    errorMessage: '',
-                    shouldAllowComponentToUpdate: false
+                    errorMessage: ''
                 });
             }
         }).catch(error => {

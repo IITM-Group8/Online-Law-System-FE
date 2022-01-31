@@ -103,7 +103,13 @@ function Navbar(props) {
 
         {
           displayState === 'ipcLaw' ?
-            <IPCLaw />
+            <IPCLaw isSearchLaw = {true} isUpdateLaw = {false} />
+            : <></>
+        }
+
+        {
+          displayState === 'updateIpcLaws' ?
+            <IPCLaw isSearchLaw = {false} isUpdateLaw = {true} />
             : <></>
         }
       </IconContext.Provider>

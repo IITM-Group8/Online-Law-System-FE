@@ -6,7 +6,6 @@ import { Navigate } from 'react-router-dom'
 import * as CommonConstants from '../Constants/CommonConstants.js'
 import '../Styles/home.css';
 import '../Styles/login.css';
-import LawLogo from '../Images/law_logo3.jpg';
 import UserIcon from '../Images/User-Icon.png';
 
 const customStyle = {
@@ -46,18 +45,13 @@ class Header extends Component {
         return (
             <>
                 <div className="container">
+                    <span className='logo'>
+                        <p>Truth Alone Triumphs</p>   
+                    </span>
                     <div className="sign_container">
                         <span className="signspan" id="login" onClick={this.loginOpenHandler}>LOGIN</span>
                         <span className="signspan" id="signup" onClick={this.signUpOpenHandler}>SIGN UP</span>
-                    </div>
-                    <div className="logo">
-                        <img src={LawLogo} alt='Not found' />
-                        <p>Online Law System</p>
-                    </div>
-                    <div className="options">
-                        <span className="option_span" id="home">Home</span>
-                        <span className="option_span" id="aboutus">About Us</span>
-                    </div>
+                    </div>                
                 </div>
 
                 <Modal isOpen={isSignInFormOpen} style={customStyle} ariaHideApp={false}>

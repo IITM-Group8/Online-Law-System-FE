@@ -11,54 +11,44 @@
   .container {
     background: rgba(255, 255, 255, 1);
     position: relative;
-    overflow: hidden;
-    padding: 25px;
-    border: solid 10px #020104;
-    border-radius: 5px;
+    background: url("../Images/Law-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 590px;
+    width: auto;
   }
-  
-  .logo {
-    height: 100px;
-    margin: 0px 10px;
-  }
-  
-  .logo img {
-    position: absolute;
-    width: 150px;
-    height: 60%;  
-    margin-top: -25px;
-  }
-  
+     
   .logo p {
     text-align: center;
     font-size: 50px;
     padding: 0px 51px 0px 0px;
-    width: 90%;
-    color: #020104;
+    color: hsl(260, 100%, 7%);
     margin-left: 25%;
+    width: 100%;
   }
   
   .sign_container {
-    padding: 15px 100px 15px 100px;
-    float: right;
-    margin-right: -10%;
-    margin-top: -2%
+    margin-right: 2rem;
+    margin-top: -25rem;
   }
   
   .signspan {
-    color: rgba(255,255,255,1);
+    color: white;
     font-size: 24px;
     opacity: 1;
-    border: solid 5px;
-    border-color: #ffec83;
+    border: solid 5px white;
     padding: 10px 10px 10px 10px;
-    margin-right: 25px;
-    background:#020104;
+    margin-right: 1rem;
     cursor: pointer;
+    display: grid;
   }
   
   #login{
     float: left;
+    margin-bottom: 2rem;
   }
   
   #signup{
@@ -68,6 +58,7 @@
   .signspan:hover{
     background:white;
     color: #020104;
+    border-color: white;
   }
   
   .options{
@@ -85,29 +76,27 @@
   }
   
   .body_container{
-    height: 100%;
-    width: 100%;
-    margin: 25px 0 25px 25px;
+    height: auto;
+    width: auto;
+    display: flex;
+    padding: 2rem 2rem 30rem 2rem;
+    justify-content: space-around;
   }
   
   .justice_logo {
-    width: 50%;
-    height: 75%;
+    width: 32rem;
+    height: 22rem;
     background: url("../Images/v1_4.png");
     background-repeat: no-repeat;
-    opacity: 1;
-    float: left;
-    position: absolute;
   }
   
   .body_description {
-    width: 50%;
+    width: 52%;
     color: black;
     font-size: 20px;
-    opacity: 1;
     float: right;
     text-align: justify;
-    margin: 0 80px 0 0;
+    margin: 0 3rem 0 0;
     line-height: 1.6;
   }
   
