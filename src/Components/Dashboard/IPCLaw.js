@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Modal from 'react-modal';
 
 import '../../Styles/dashboardbody.css';
 import * as CommonConstants from '../../Constants/CommonConstants.js'
@@ -32,7 +31,7 @@ class IPCLaw extends Component {
             <>
                 {
                     isSearchLaw ?
-                        <div className='search-ipclaw-container'>
+                        <div className='inner-dashboard-container'>
                             <input type="text" value={IPCSectionNo} id="ipc-section" placeholder="Search for IPC Section No." onChange={(event) => this.handleChange(event, 'IPCSectionNo')}></input>
                             <input type="text" value={IPCSectionKey} id="ipc-section-key" placeholder="Search with some Keys" onChange={(event) => this.handleChange(event, 'IPCSectionKey')}></input>
                             {errorMessage && <div className="error-msg"> {errorMessage} </div>}
@@ -44,7 +43,7 @@ class IPCLaw extends Component {
                         </div>
                         : <></>
                 }
-                <div className='search-ipclaw-container'>
+                <div className='inner-dashboard-container'>
                     {
                         displayIPCLawDetails ?
                             <>
@@ -59,7 +58,7 @@ class IPCLaw extends Component {
 
                 {
                     isUpdateLaw ?
-                        <div className='search-ipclaw-container'>
+                        <div className='inner-dashboard-container'>
                             <input type="text" value={IPCSectionNo} id="insert-ipc-section" placeholder="Enter IPC Section No." onChange={(event) => this.handleChange(event, 'IPCSectionNo')}></input>
                             <textarea name="Enter Description" id="insert-ipc-section-key" placeholder="Enter Law description."
                                 onChange={(event) => this.handleChange(event, 'IPCSectionKey')} value={IPCSectionKey}></textarea>

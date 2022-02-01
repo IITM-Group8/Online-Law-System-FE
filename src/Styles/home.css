@@ -100,3 +100,7 @@
     line-height: 1.6;
   }
   
+  #loading-icon{
+    position:absolute;
+    margin-top: 10rem;   
+  }

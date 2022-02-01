@@ -19,14 +19,13 @@ export const FETCH_USERS_BY_ROLE = '/user/usersByRole/';
 export const FETCH_IPC_LAWS = '/laws/ipcLaws/';
 export const UPDATE_USER_STATUS = '/user/userStatus';
 export const UPDATE_IPC_LAWS = '/laws/ipcLaw';
+export const UPDATE_COURT_DETAILS = '/court/courts';
 
 const SEARCH_LAWYER_DETAILS = '/user/lawyer/searchLawyer';
 const FETCH_COURT_BY_AREA = '/court/courts/{area}';
-const UPDATE_COURT_DETAILS = '/court/courts';
 const VIEW_A_CASE_STATUS = '/case/caseDetails/{Case-Status}';
 const FILE_A_CASE_BY_PUBLIC = '/case/public/fileACase';
 const FILE_A_CASE_BY_LAWYER = '/case/lawyer/fileACase';
-
 const GENERATE_REPORTS = '/reports/generateReports';
 
 export const LIST_OF_MENUS_FOR_ADMIN = [

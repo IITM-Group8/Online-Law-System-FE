@@ -7,6 +7,7 @@ import * as CommonConstants from '../Constants/CommonConstants.js'
 import '../Styles/home.css';
 import '../Styles/login.css';
 import UserIcon from '../Images/User-Icon.png';
+import Loading from '../Images/Loading.gif';
 
 const customStyle = {
     content: {
@@ -35,12 +36,13 @@ class Header extends Component {
             userDetails: {},
             errorMessage: '',
             successMessage: '',
-            toRedirect: false
+            toRedirect: false,
+            loadImage: false
         }
     }
 
     render() {
-        const { Name, Email, Password, Mobile, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage, successMessage, toRedirect } = this.state;
+        const { Name, Email, Password, Mobile, Age, Address, City, Pincode, Expertize, isSignInFormOpen, isSignUpFormOpen, expertizeId, userDetails, errorMessage, successMessage, toRedirect, loadImage } = this.state;
 
         return (
             <>
@@ -122,6 +124,12 @@ class Header extends Component {
                         </div>
                     </div>
                 </Modal>
+
+
+                <Modal isOpen={loadImage} style={customStyle} ariaHideApp={false}>
+                    
+                    <center><img id='loading-icon' src={Loading} alt="Loading..." /> </center>
+                </Modal>
             </>
         );
     }
@@ -166,7 +174,8 @@ class Header extends Component {
             Email: '',
             Password: '',
             isSignInFormOpen: false,
-            errorMessage: ''
+            errorMessage: '',
+            loadImage: false
         });
     }
 
@@ -186,6 +195,7 @@ class Header extends Component {
             expertizeId: 'expertizeHide',
             successMessage: '',
             errorMessage: '',
+            loadImage: false
         });
     }
 
@@ -194,7 +204,8 @@ class Header extends Component {
         const { Email, Password } = this.state;
         this.setState({
             errorMessage: '',
-            successMessage: ''
+            successMessage: '',
+            loadImage: true
         });
         if (!Email || !Password) {
             console.log("User credentials are missing");
@@ -223,7 +234,8 @@ class Header extends Component {
                     errMsg = userData.message;
                 }
                 this.setState({
-                    errorMessage: errMsg
+                    errorMessage: errMsg,
+                    loadImage: false
                 });
             } else {
                 console.log("Login success for ", userData.name);
@@ -244,7 +256,8 @@ class Header extends Component {
                     errorMessage: '',
                     Email: '',
                     Password: '',
-                    toRedirect: true
+                    toRedirect: true,
+                    loadImage: false
                 });
                 this.signInCancelHandler();
             }
@@ -256,7 +269,8 @@ class Header extends Component {
             }
             console.log("response in catch ", errMsg);
             this.setState({
-                errorMessage: errMsg
+                errorMessage: errMsg,
+                loadImage: false
             });
         });
     }
@@ -265,7 +279,8 @@ class Header extends Component {
         console.log("signUpHandler begins");
         this.setState({
             errorMessage: '',
-            successMessage: ''
+            successMessage: '',
+            loadImage: true
         });
         const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize } = this.state;
         if (!Name || !Email || !Password || !Mobile || !Role || !Age || !Address || !City || !Pincode) {
@@ -302,7 +317,8 @@ class Header extends Component {
                     errMsg = resultData.message;
                 }
                 this.setState({
-                    errorMessage: errMsg
+                    errorMessage: errMsg,
+                    loadImage: false
                 });
             } else {
                 this.setState({
@@ -317,7 +333,8 @@ class Header extends Component {
                     City: '',
                     Pincode: '',
                     Expertize: '',
-                    successMessage: 'User Registered successfully'
+                    successMessage: 'User Registered successfully',
+                    loadImage: false
                 });
             }
         }).catch(error => {
@@ -328,7 +345,8 @@ class Header extends Component {
                 errMsg = errData.message;
             }
             this.setState({
-                errorMessage: errMsg
+                errorMessage: errMsg,
+                loadImage: false
             });
         });
     }

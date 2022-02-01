@@ -12,6 +12,7 @@ import SearchUser from './SearchUser';
 import { LocalStorageService } from '../LocalStorageService';
 import * as CommonConstants from '../../Constants/CommonConstants.js'
 import IPCLaw from './IPCLaw';
+import Court from './Court';
 
 function Navbar(props) {
   const userName = props.userName;
@@ -110,6 +111,12 @@ function Navbar(props) {
         {
           displayState === 'updateIpcLaws' ?
             <IPCLaw isSearchLaw = {false} isUpdateLaw = {true} />
+            : <></>
+        }
+
+        {
+          displayState === 'updateCourtDet' ?
+            <Court isSearchCourt = {false} isUpdateCourt = {true} />
             : <></>
         }
       </IconContext.Provider>
