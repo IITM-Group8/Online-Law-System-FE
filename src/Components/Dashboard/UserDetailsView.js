@@ -46,16 +46,34 @@ function UserDetailsView(props) {
         setPage(0);
     };
 
-    const rows = props.listOfUserDetails;
+    // const rows = props.listOfUserDetails;
     const [noOfRowsPerPage, setNoOfRowsPerPage] = React.useState([]);
-    if(rows.length >= 100){
-        setNoOfRowsPerPage([10, 25, 50, 100])
-    }else if(rows.length >= 50){
-        setNoOfRowsPerPage([10, 25, 50])
-    }else if(rows.length >= 25){
-        setNoOfRowsPerPage([10, 25])
-    }else if(rows.length >= 10){
-        setNoOfRowsPerPage([10])
+    const updateNoOfRows = (noOfRows) => {
+        if(noOfRows >= 100){
+            setNoOfRowsPerPage([10, 25, 50, 100])
+        }else if(noOfRows >= 50){
+            setNoOfRowsPerPage([10, 25, 50])
+        }else if(noOfRows >= 25){
+            setNoOfRowsPerPage([10, 25])
+        }else if(noOfRows >= 10){
+            setNoOfRowsPerPage([10])
+        }
+    }
+
+    var [rows, setRows] = React.useState([]);
+    if(rows.length === 0){
+        setRows(props.listOfUserDetails);
+        updateNoOfRows(rows.length);
+    }   
+        
+    const updateRows = (userDetailsList, userId) =>{
+        for(let val of userDetailsList){
+            if(val.id === userId){
+                userDetailsList.pop(val.id);
+                setRows(userDetailsList);
+                updateNoOfRows(userDetailsList.length);
+            }            
+        }
     }
 
     const [errorMessage, setErrorMessage] = React.useState('');
@@ -78,7 +96,9 @@ function UserDetailsView(props) {
         const request = {
             id: userId,
             user_status: user_status
-        }
+        }        
+        updateSuccessMessage('');
+        updateErrorMessage('');
         const url = CommonConstants.ONLINE_LAW_SYSTEM_MS_HOST + CommonConstants.ONLINE_LAW_SYSTEM_MS_PORT + CommonConstants.UPDATE_USER_STATUS;
         console.log("request ", request);
         axios({
@@ -89,7 +109,7 @@ function UserDetailsView(props) {
         }).then(result => {
             const resultData = result.data;
             console.log(" resultData : ", resultData);
-            if (resultData.statusCode !== 200) {
+            if (resultData.statusCode !== 201 && resultData.statusCode !== 200) {
                 var errMsg = 'Failed to update User Status';
                 if (resultData.message != null) {
                     errMsg = resultData.message;
@@ -97,8 +117,9 @@ function UserDetailsView(props) {
                 updateErrorMessage(errMsg);
                 updateSuccessMessage('');
             } else {
-                updateSuccessMessage('User status update successfully.');
-                updateErrorMessage('');
+                updateRows(rows, userId);
+                updateSuccessMessage('User status updated successfully.');
+                updateErrorMessage('');                
             }
         }).catch(error => {
             const errData = error.response.data;
@@ -136,22 +157,17 @@ function UserDetailsView(props) {
                         {rows
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
+                                console.log("check after update rows : ", rows);
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {
-                                            const userId = row.id;
-                                            console.log("userId : ", userId);
-                                            var user_status = 'Active';
-                                            if(row.user_status !== 'Active'){
-                                                user_status = 'InActive';
-                                            }
                                             const value = row[column.id];
                                             return (
                                                 <>
                                                 {
                                                     column.id === 'update_user' ?
                                                     <label id='update-user-status'>
-                                                    <Link to = "#" align={column.align} onClick={() => updateUserStatus(userId, user_status)}>
+                                                    <Link to = "#" align={column.align} onClick={() => updateUserStatus(row.id, row.update_user)}>
                                                         {value}
                                                     </Link>
                                                     </label>
