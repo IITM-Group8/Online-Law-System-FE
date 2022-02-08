@@ -20,9 +20,9 @@ export const FETCH_IPC_LAWS = '/laws/ipcLaws/';
 export const UPDATE_USER_STATUS = '/user/userStatus';
 export const UPDATE_IPC_LAWS = '/laws/ipcLaw';
 export const UPDATE_COURT_DETAILS = '/court/courts';
+export const FETCH_COURT_BY_AREA = '/court/fetch/courts';
 
-const SEARCH_LAWYER_DETAILS = '/user/lawyer/searchLawyer';
-const FETCH_COURT_BY_AREA = '/court/courts/{area}';
+
 const VIEW_A_CASE_STATUS = '/case/caseDetails/{Case-Status}';
 const FILE_A_CASE_BY_PUBLIC = '/case/public/fileACase';
 const FILE_A_CASE_BY_LAWYER = '/case/lawyer/fileACase';
@@ -101,14 +101,9 @@ export const LIST_OF_MENUS_FOR_PUBLIC = [
         stateName: 'courtByArea'
     },
     {
-        title: 'Search Lawyers',
-        cName: "nav-text",
-        stateName: 'searchLawyers'
-    },
-    {
         title: 'View Case Status',
         cName: "nav-text",
-        stateName: 'courtByArea'
+        stateName: 'viewACase'
     },
     {
         title: 'File a Case',

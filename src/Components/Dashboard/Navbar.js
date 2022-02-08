@@ -13,6 +13,7 @@ import { LocalStorageService } from '../LocalStorageService';
 import * as CommonConstants from '../../Constants/CommonConstants.js'
 import IPCLaw from './IPCLaw';
 import Court from './Court';
+import Case from './Case';
 
 function Navbar(props) {
   const userName = props.userName;
@@ -98,7 +99,7 @@ function Navbar(props) {
 
         {
           displayState === 'searchUsers' ?
-            <SearchUser />
+            <SearchUser isSearchUSer />
             : <></>
         }
 
@@ -115,10 +116,29 @@ function Navbar(props) {
         }
 
         {
+          displayState === 'courtByArea' ?
+            <Court isSearchCourt = {true} isUpdateCourt = {false} />
+            : <></>
+        }
+
+        {
           displayState === 'updateCourtDet' ?
             <Court isSearchCourt = {false} isUpdateCourt = {true} />
             : <></>
         }
+
+        {
+          displayState === 'fileACase' ?
+            <Case isForFileACase = {true} isForViewACase = {false} />
+            : <></>
+        }
+        
+        {
+          displayState === 'viewACase' ?
+            <Case isForFileACase = {false} isForViewACase = {true} />
+            : <></>
+        }
+
       </IconContext.Provider>
     </>
   );

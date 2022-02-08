@@ -91,3 +91,12 @@
 #insert-ipc-section-key{
     height: 10rem;
 }
+
+#search-text{
+    width: 25%;
+    border: groove 1px;
+}
+
+.law-search-submit-cntr{
+    width: 25%;
+}
