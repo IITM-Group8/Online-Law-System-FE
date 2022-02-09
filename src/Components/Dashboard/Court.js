@@ -75,7 +75,8 @@ class Court extends Component {
 
     closeCourtDetailsSection = () => {
         this.setState({
-            displayCourtDetails: false
+            displayCourtDetails: false,
+            listOfCourtDetails: []
         });
     }
 
@@ -83,8 +84,7 @@ class Court extends Component {
         this.setState({
             [stateVariable]: event.target.value,
             errorMessage: '',
-            successMessage: '',
-            updateErrMsg: ''
+            successMessage: ''
         });
     }
 
@@ -200,7 +200,7 @@ class Court extends Component {
             }
             console.log("response in catch ", errMsg);
             this.setState({
-                updateErrMsg: errMsg
+                errorMessage: errMsg
             });
         });
     }

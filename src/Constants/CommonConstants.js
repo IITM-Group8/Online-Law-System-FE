@@ -21,10 +21,12 @@ export const UPDATE_USER_STATUS = '/user/userStatus';
 export const UPDATE_IPC_LAWS = '/laws/ipcLaw';
 export const UPDATE_COURT_DETAILS = '/court/courts';
 export const FETCH_COURT_BY_AREA = '/court/fetch/courts';
+export const FETCH_LAWYER = '/user/lawyers';
+export const FILE_A_CASE_BY_PUBLIC = '/case/public/fileACase';
 
 
 const VIEW_A_CASE_STATUS = '/case/caseDetails/{Case-Status}';
-const FILE_A_CASE_BY_PUBLIC = '/case/public/fileACase';
+
 const FILE_A_CASE_BY_LAWYER = '/case/lawyer/fileACase';
 const GENERATE_REPORTS = '/reports/generateReports';
 

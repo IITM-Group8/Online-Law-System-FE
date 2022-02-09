@@ -100,3 +100,25 @@
 .law-search-submit-cntr{
     width: 25%;
 }
+
+.law-search-submit-side{
+    float: right;
+    width: 25%;
+    margin-right: 12rem;
+}
+
+#search-text-side{
+    width: 25%;
+    border: groove 1px;
+    margin-left: 2rem;
+}
+
+.choose-file{
+    width: 25%;
+    padding: 1rem 0rem 1rem 0rem;
+}
+
+.lawyer-details-container{
+    display: grid;
+    margin: -7rem 0rem 0 -16rem;
+}

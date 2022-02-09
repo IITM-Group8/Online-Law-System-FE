@@ -286,7 +286,8 @@ class Header extends Component {
         if (!Name || !Email || !Password || !Mobile || !Role || !Age || !Address || !City || !Pincode) {
             console.log("Mandatory fields are missing");
             this.setState({
-                errorMessage: 'Mandatory fields are missing'
+                errorMessage: 'Mandatory fields are missing',
+                loadImage: false
             });
             return;
         }

@@ -8,6 +8,8 @@ function Dashboard() {
     
     const userName = localStorage.getItem(CommonConstants.USER_NAME);
     const userRole = localStorage.getItem(CommonConstants.USER_ROLE);
+    // const userName = "Amalesh";
+    // const userRole = "Public";
     console.log("userName and userRole : ", userName, userRole);
     if(userName === null || userRole === null){
         console.log("User details are empty: ", userRole);
