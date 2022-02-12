@@ -44,6 +44,7 @@
 .inner-dashboard-container{
     display: grid;
     margin: 5rem 2rem 0 16rem;
+    position: sticky;
 }
 
 #ipc-section{
@@ -121,4 +122,15 @@
 .lawyer-details-container{
     display: grid;
     margin: -7rem 0rem 0 -16rem;
+}
+
+#search-select{
+    width: 25%;
+    border: groove 1px;
+    font-size: 10px;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+#case-files{
+    color: #020104;
 }

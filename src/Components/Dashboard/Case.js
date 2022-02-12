@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Select, CaretIcon, ModalCloseButton } from 'react-responsive-select';
 
 import '../../Styles/dashboardbody.css';
 import * as CommonConstants from '../../Constants/CommonConstants.js'
 import LawyerDetailsView from './LawyerDetailsView';
+import CaseDetailsView from './CaseDetailsView'
 
 class Case extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            publicUserId: localStorage.getItem(CommonConstants.USER_ID),
+            userId: localStorage.getItem(CommonConstants.USER_ID),
             lawyerId: '',
             ipcSection: '',
             caseDescription: '',
@@ -23,12 +25,15 @@ class Case extends Component {
             lawyerExpertize: '',
             searchLawyerErrorMessage: '',
             displayLawyerDetails: false,
-            listOfLawyerDetails: []
+            listOfLawyerDetails: [],
+            caseStatus: '',
+            displayCaseDetails: false,
+            listOfCaseDetails: []
         }
     }
 
     render() {
-        const { lawyerId, ipcSection, caseDescription, isForFileACase, isForViewACase, errorMessage, successMessage, lawyerName, lawyerExpertize, searchLawyerErrorMessage, displayLawyerDetails, listOfLawyerDetails } = this.state;
+        const { lawyerId, ipcSection, caseDescription, isForFileACase, isForViewACase, errorMessage, successMessage, lawyerName, lawyerExpertize, searchLawyerErrorMessage, displayLawyerDetails, listOfLawyerDetails, displayCaseDetails, listOfCaseDetails } = this.state;
         return (
             <>
                 {
@@ -71,19 +76,71 @@ class Case extends Component {
                         </div>
                         :
                         isForViewACase ?
-                            <div className='inner-dashboard-container'>
-                                Work In-Progress
+                            <div className='search-container'>
+                                <div className='search-user-title'>
+                                    <h1>Check Case Status</h1>
+                                </div>
+                                <div className='dashboard-form-container' >
+                                    <span className='dashboard-select'>
+                                        <Select
+                                            name="caseStatus"
+                                            modalCloseButton={<ModalCloseButton />}
+                                            options={[
+                                                { value: '', text: 'Select Case Status' },
+                                                { value: 'New', text: 'New' },
+                                                { value: 'Accepted', text: 'Accepted' },
+                                                { value: 'Rejected', text: 'Rejected' },
+                                                { value: 'Filed To Court', text: 'Filed To Court' }
+                                            ]}
+                                            caretIcon={<CaretIcon />}
+                                            onChange={(event) => this.handleChangeSelect(event, 'caseStatus')}
+                                            required
+                                        />
+                                    </span>
+                                    <button type='submit' onClick={this.filedCaseStatus} >
+                                        Submit
+                                    </button>
+                                    {errorMessage && <div className="error-msg"> {errorMessage} </div>}
+                                </div>
                             </div>
                             : <></>
                 }
+
+                <div className='inner-dashboard-container'>
+                    {
+                        displayCaseDetails ?
+                            <>
+                                <CaseDetailsView listOfCaseDetails={listOfCaseDetails} />
+                                <div className='law-search-cancelbtn-cntr'>
+                                    <button type="button" id="law-search-cancelbtn" onClick={this.closeCaseDetailsSection} >Close</button>
+                                </div>
+                            </>
+                            : <></>
+                    }
+                </div>
             </>
         )
+    }
+
+    closeCaseDetailsSection = () => {
+        this.setState({
+            displayCaseDetails: false,
+            listOfCaseDetails: []
+        });
     }
 
     closeLawyerDetailsSection = () => {
         this.setState({
             displayLawyerDetails: false,
             listOfLawyerDetails: []
+        });
+    }
+
+    handleChangeSelect = (event, stateVariable) => {
+        this.setState({
+            [stateVariable]: event.value,
+            errorMessage: '',
+            successMessage: ''
         });
     }
 
@@ -172,16 +229,16 @@ class Case extends Component {
             errorMessage: '',
             successMessage: ''
         });
-        const { publicUserId, lawyerId, ipcSection, caseDescription, caseFiles } = this.state;
-        console.log("input state : ", publicUserId, lawyerId, ipcSection);
-        if (!publicUserId || !lawyerId || !ipcSection || !caseDescription) {
+        const { userId, lawyerId, ipcSection, caseDescription, caseFiles } = this.state;
+        console.log("input state : ", userId, lawyerId, ipcSection);
+        if (!userId || !lawyerId || !ipcSection || !caseDescription) {
             this.setState({
                 errorMessage: 'Invalid Input'
             });
             return;
         }
         const formData = new FormData();
-        formData.append('public_user_id', publicUserId);
+        formData.append('public_user_id', userId);
         formData.append('lawyer_id', lawyerId);
         formData.append('ipc_section', ipcSection);
         formData.append('case_description', caseDescription);
@@ -215,11 +272,12 @@ class Case extends Component {
                 this.setState({
                     errorMessage: '',
                     successMessage: successMsg,
-                    publicUserId: '',
                     lawyerId: '',
                     ipcSection: '',
                     caseDescription: '',
-                    caseFiles: ''
+                    caseFiles: '',
+                    lawyerName: '',
+                    lawyerExpertize: ''
                 });
             }
         }).catch(error => {
@@ -231,6 +289,75 @@ class Case extends Component {
             console.log("response in catch ", errMsg);
             this.setState({
                 errorMessage: errMsg
+            });
+        });
+    }
+
+    filedCaseStatus = () => {
+        const { userId, caseStatus } = this.state;
+        console.log("input state to get case ttatus: ", userId, caseStatus);
+        if (!userId || !caseStatus) {
+            this.setState({
+                errorMessage: 'Invalid Input'
+            });
+            return;
+        }
+        var request = {};
+        const role = localStorage.getItem(CommonConstants.USER_ROLE);
+        if (role === 'Public') {
+            request = {
+                caseStatus: caseStatus,
+                publicUserId: userId
+            }
+        } else if (role === 'Lawyer') {
+            request = {
+                caseStatus: caseStatus,
+                lawyerUserId: userId
+            }
+        } else {
+            this.setState({
+                errorMessage: 'Invalid role.'
+            });
+            return;
+        }
+
+        const url = CommonConstants.ONLINE_LAW_SYSTEM_MS_HOST + CommonConstants.ONLINE_LAW_SYSTEM_MS_PORT + CommonConstants.VIEW_A_CASE_STATUS;
+        console.log("request ", request);
+        axios({
+            method: CommonConstants.POST,
+            url: url,
+            headers: { 'Content-Type': 'application/json' },
+            data: request,
+        }).then(result => {
+            const resultData = result.data;
+            console.log(" resultData : ", resultData.case);
+            if (resultData.statusCode !== 200) {
+                var errMsg = 'Case details not found for the given input';
+                if (resultData.message != null) {
+                    errMsg = resultData.message;
+                }
+                this.setState({
+                    errorMessage: errMsg,
+                    displayCaseDetails: false,
+                    listOfCaseDetails: []
+                });
+            } else {
+                this.setState({
+                    errorMessage: '',
+                    displayCaseDetails: true,
+                    listOfCaseDetails: resultData.case
+                });
+            }
+        }).catch(error => {
+            const errData = error.response.data;
+            let errMsg = 'Failed to fetch Case details.';
+            if (!errData.message) {
+                errMsg = errData.message;
+            }
+            console.log("response in catch ", errMsg);
+            this.setState({
+                errorMessage: errMsg,
+                displayCaseDetails: false
             });
         });
     }
