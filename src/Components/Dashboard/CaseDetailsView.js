@@ -78,7 +78,10 @@ function CaseDetailsView(props) {
     const downloadFiles = (files) => {
         var downloadedFiles = [];
         for (let caseFiles of files) {
-            console.log(caseFiles.contentType);
+            
+            //TODO:
+            //Currently supporting only text file. Yet to do for the other types of files.
+
             // let buff = new Buffer(caseFiles.file, 'base64');
             // let buff = Buffer.from(caseFiles.file, 'base64');
             // console.log("caseFiles.file ", buff);
