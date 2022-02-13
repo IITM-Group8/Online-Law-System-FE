@@ -23,12 +23,9 @@ export const UPDATE_COURT_DETAILS = '/court/courts';
 export const FETCH_COURT_BY_AREA = '/court/fetch/courts';
 export const FETCH_LAWYER = '/user/lawyers';
 export const FILE_A_CASE_BY_PUBLIC = '/case/public/fileACase';
-
-
-const VIEW_A_CASE_STATUS = '/case/caseDetails/{Case-Status}';
-
-const FILE_A_CASE_BY_LAWYER = '/case/lawyer/fileACase';
-const GENERATE_REPORTS = '/reports/generateReports';
+export const VIEW_A_CASE_STATUS = '/case/caseDetails';
+export const UPDATE_CASE_STATUS = '/case/caseStatus';
+export const GENERATE_REPORTS = '/reports/generateReport';
 
 export const LIST_OF_MENUS_FOR_ADMIN = [
     {
@@ -57,11 +54,6 @@ export const LIST_OF_MENUS_FOR_ADMIN = [
         stateName: 'updateCourtDet'
     },
     {
-        title: 'View Case Status',
-        cName: "nav-text",
-        stateName: 'viewCaseDet'
-    },
-    {
         title: 'Generate Reports',
         cName: "nav-text",
         stateName: 'generateReports'
@@ -82,12 +74,7 @@ export const LIST_OF_MENUS_FOR_LAWYER = [
     {
         title: 'View Case Status',
         cName: "nav-text",
-        stateName: 'viewCaseDet'
-    },
-    {
-        title: 'File a Case',
-        cName: "nav-text",
-        stateName: 'fileACase'
+        stateName: 'viewACase'
     }
 ];
 

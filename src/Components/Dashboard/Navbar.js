@@ -14,6 +14,7 @@ import * as CommonConstants from '../../Constants/CommonConstants.js'
 import IPCLaw from './IPCLaw';
 import Court from './Court';
 import Case from './Case';
+import Report from './Report';
 
 function Navbar(props) {
   const userName = props.userName;
@@ -136,6 +137,12 @@ function Navbar(props) {
         {
           displayState === 'viewACase' ?
             <Case isForFileACase = {false} isForViewACase = {true} />
+            : <></>
+        }
+
+        {
+          displayState === 'generateReports' ?
+            <Report />
             : <></>
         }
 

@@ -61,6 +61,7 @@ function UserDetailsView(props) {
     }
 
     var [rows, setRows] = React.useState([]);
+    console.log("rows.length : : : ", rows.length);
     if(rows.length === 0){
         setRows(props.listOfUserDetails);
         updateNoOfRows(rows.length);
@@ -157,7 +158,6 @@ function UserDetailsView(props) {
                         {rows
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
-                                console.log("check after update rows : ", rows);
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {

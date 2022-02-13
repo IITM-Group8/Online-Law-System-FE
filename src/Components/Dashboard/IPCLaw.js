@@ -32,6 +32,9 @@ class IPCLaw extends Component {
                 {
                     isSearchLaw ?
                         <div className='inner-dashboard-container'>
+                            <div className='inner-header-container'>
+                                    <h1>Search Law</h1>
+                                </div>
                             <input type="text" value={IPCSectionNo} id="ipc-section" placeholder="Search for IPC Section No." onChange={(event) => this.handleChange(event, 'IPCSectionNo')}></input>
                             <input type="text" value={IPCSectionKey} id="ipc-section-key" placeholder="Search with some Keys" onChange={(event) => this.handleChange(event, 'IPCSectionKey')}></input>
                             {errorMessage && <div className="error-msg"> {errorMessage} </div>}
@@ -41,7 +44,25 @@ class IPCLaw extends Component {
                                 </button>
                             </div>
                         </div>
-                        : <></>
+                        :
+                        isUpdateLaw ?
+                            <div className='inner-dashboard-container'>
+                                <div className='inner-header-container'>
+                                    <h1>Update Law Details</h1>
+                                </div>
+                                <input type="text" value={IPCSectionNo} id="insert-ipc-section" placeholder="Enter IPC Section No." onChange={(event) => this.handleChange(event, 'IPCSectionNo')}></input>
+                                <textarea name="Enter Description" id="insert-ipc-section-key" placeholder="Enter Law description."
+                                    onChange={(event) => this.handleChange(event, 'IPCSectionKey')} value={IPCSectionKey}></textarea>
+                                {errorMessage && <div className="error-msg"> {errorMessage} </div>}
+                                <div className='law-search-submit-cntr'>
+                                    <button type='submit' id="law-insert-submit" onClick={this.updateIPCLaw} >
+                                        Submit
+                                    </button>
+                                </div>
+                                {updateErrMsg && <div className="error-msg"> {updateErrMsg} </div>}
+                                {successMessage && <div className="success-msg"> {successMessage} </div>}
+                            </div>
+                            : <></>
                 }
                 <div className='inner-dashboard-container'>
                     {
@@ -55,25 +76,6 @@ class IPCLaw extends Component {
                             : <></>
                     }
                 </div>
-
-                {
-                    isUpdateLaw ?
-                        <div className='inner-dashboard-container'>
-                            <input type="text" value={IPCSectionNo} id="insert-ipc-section" placeholder="Enter IPC Section No." onChange={(event) => this.handleChange(event, 'IPCSectionNo')}></input>
-                            <textarea name="Enter Description" id="insert-ipc-section-key" placeholder="Enter Law description."
-                                onChange={(event) => this.handleChange(event, 'IPCSectionKey')} value={IPCSectionKey}></textarea>
-                            {errorMessage && <div className="error-msg"> {errorMessage} </div>}
-                            <div className='law-search-submit-cntr'>
-                                <button type='submit' id="law-insert-submit" onClick={this.updateIPCLaw} >
-                                    Submit
-                                </button>
-                            </div>
-                            {updateErrMsg && <div className="error-msg"> {updateErrMsg} </div>}
-                            {successMessage && <div className="success-msg"> {successMessage} </div>}
-                        </div>
-                        : <></>
-                }
-
             </>
         )
     }
@@ -186,7 +188,9 @@ class IPCLaw extends Component {
             } else {
                 this.setState({
                     updateErrMsg: '',
-                    successMessage: 'IPC Law details persisted successfully'
+                    successMessage: 'IPC Law details persisted successfully',
+                    IPCSectionNo: '',
+                    IPCSectionKey: ''
                 });
             }
         }).catch(error => {

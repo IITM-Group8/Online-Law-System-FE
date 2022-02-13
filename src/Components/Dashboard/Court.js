@@ -31,6 +31,9 @@ class Court extends Component {
                 {
                     isSearchCourt ?
                         <div className='inner-dashboard-container'>
+                            <div className='inner-header-container'>
+                                <h1>Search Court</h1>
+                            </div>
                             <input type="text" value={areaName} id="search-text" placeholder="Search court by Area" onChange={(event) => this.handleChange(event, 'areaName')}></input>
                             <input type="text" value={pincode} id="search-text" placeholder="Search court by pincode" onChange={(event) => this.handleChange(event, 'pincode')}></input>
                             {errorMessage && <div className="error-msg"> {errorMessage} </div>}
@@ -43,6 +46,9 @@ class Court extends Component {
                         :
                         isUpdateCourt ?
                             <div className='inner-dashboard-container'>
+                                <div className='inner-header-container'>
+                                    <h1>Update Court Details</h1>
+                                </div>
                                 <input type="text" value={courtType} id="search-text" placeholder="Enter Court Type" onChange={(event) => this.handleChange(event, 'courtType')}></input>
                                 <input type="text" value={areaName} id="search-text" placeholder="City" onChange={(event) => this.handleChange(event, 'areaName')}></input>
                                 <input type="text" value={pincode} id="search-text" placeholder="Pincode" onChange={(event) => this.handleChange(event, 'pincode')}></input>

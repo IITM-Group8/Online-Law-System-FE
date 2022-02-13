@@ -72,7 +72,7 @@ class Header extends Component {
                         </div>
                         <div className="login-container">
                             <button type="button" className="cancelbtn" onClick={this.signInCancelHandler}>Cancel</button>
-                            <span className="psw"><a href="#">Forgot Password?</a></span>
+                            {/* <span className="psw"><a href="#">Forgot Password?</a></span> */}
                         </div>
                     </div>
                 </Modal>
@@ -280,14 +280,14 @@ class Header extends Component {
         this.setState({
             errorMessage: '',
             successMessage: '',
-            loadImage: true
+            // loadImage: true
         });
         const { Name, Email, Password, Mobile, Role, Age, Address, City, Pincode, Expertize } = this.state;
         if (!Name || !Email || !Password || !Mobile || !Role || !Age || !Address || !City || !Pincode) {
             console.log("Mandatory fields are missing");
             this.setState({
                 errorMessage: 'Mandatory fields are missing',
-                loadImage: false
+                // loadImage: false
             });
             return;
         }
@@ -335,7 +335,7 @@ class Header extends Component {
                     Pincode: '',
                     Expertize: '',
                     successMessage: 'User Registered successfully',
-                    loadImage: false
+                    // loadImage: false
                 });
             }
         }).catch(error => {
