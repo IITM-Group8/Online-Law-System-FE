@@ -28,7 +28,7 @@ class Case extends Component {
             listOfLawyerDetails: [],
             caseStatus: '',
             displayCaseDetails: false,
-            listOfCaseDetails: []
+            listOfCaseDetails: undefined
         }
     }
 
@@ -39,6 +39,9 @@ class Case extends Component {
                 {
                     isForFileACase ?
                         <div className='inner-dashboard-container'>
+                            <div className='inner-header-container'>
+                                    <h1>File a Case</h1>
+                                </div>
                             <input type="text" value={ipcSection} id="search-text" placeholder="Enter IPC Section" onChange={(event) => this.handleChange(event, 'ipcSection')}></input>
                             <div className='single-div'>
                                 <input type="text" value={lawyerName} id="search-text" placeholder="Enter Lawyer Name" onChange={(event) => this.handleChange(event, 'lawyerName')}></input>
@@ -62,7 +65,7 @@ class Case extends Component {
                                     : <></>
                             }
 
-                            <input type="file" multiple className='choose-file' placeholder="Enter Lawyer Name" onChange={(event) => this.handleFileChange(event, 'caseFiles')}></input>
+                            <input type="file" id="case-files" multiple className='choose-file' placeholder="Enter Lawyer Name" onChange={(event) => this.handleFileChange(event, 'caseFiles')}></input>
 
                             <textarea name="Enter Description" id="insert-ipc-section-key" placeholder="Description"
                                 onChange={(event) => this.handleChange(event, 'caseDescription')} value={caseDescription}></textarea>
@@ -106,18 +109,17 @@ class Case extends Component {
                             : <></>
                 }
 
-                <div className='inner-dashboard-container'>
-                    {
-                        displayCaseDetails ?
-                            <>
-                                <CaseDetailsView listOfCaseDetails={listOfCaseDetails} />
-                                <div className='law-search-cancelbtn-cntr'>
-                                    <button type="button" id="law-search-cancelbtn" onClick={this.closeCaseDetailsSection} >Close</button>
-                                </div>
-                            </>
-                            : <></>
-                    }
-                </div>
+
+                {
+                    displayCaseDetails ?
+                        <div className='inner-dashboard-container'>
+                            <CaseDetailsView listOfCaseDetails={listOfCaseDetails} newDetails={true} />
+                            <div className='law-search-cancelbtn-cntr'>
+                                <button type="button" id="law-search-cancelbtn" onClick={this.closeCaseDetailsSection} >Close</button>
+                            </div>
+                        </div>
+                        : <></>
+                }
             </>
         )
     }
@@ -140,7 +142,8 @@ class Case extends Component {
         this.setState({
             [stateVariable]: event.value,
             errorMessage: '',
-            successMessage: ''
+            successMessage: '',
+            listOfCaseDetails: []
         });
     }
 
@@ -192,7 +195,6 @@ class Case extends Component {
             data: request,
         }).then(result => {
             const resultData = result.data;
-            console.log(" resultData : ", resultData.lawyerDetails);
             if (resultData.statusCode !== 200) {
                 var errMsg = 'Lawyer details not found for the given input';
                 if (resultData.message != null) {
@@ -275,10 +277,10 @@ class Case extends Component {
                     lawyerId: '',
                     ipcSection: '',
                     caseDescription: '',
-                    caseFiles: '',
                     lawyerName: '',
                     lawyerExpertize: ''
                 });
+                document.getElementById("case-files").value = '';
             }
         }).catch(error => {
             const errData = error.response.data;
@@ -294,6 +296,12 @@ class Case extends Component {
     }
 
     filedCaseStatus = () => {
+        this.setState({
+            errorMessage: '',
+            successMessage: '',
+            displayCaseDetails: false,
+            listOfCaseDetails: []
+        });
         const { userId, caseStatus } = this.state;
         console.log("input state to get case ttatus: ", userId, caseStatus);
         if (!userId || !caseStatus) {
@@ -330,7 +338,6 @@ class Case extends Component {
             data: request,
         }).then(result => {
             const resultData = result.data;
-            console.log(" resultData : ", resultData.case);
             if (resultData.statusCode !== 200) {
                 var errMsg = 'Case details not found for the given input';
                 if (resultData.message != null) {

@@ -134,3 +134,8 @@
 #case-files{
     color: #020104;
 }
+
+.inner-header-container{
+    display: flex;
+    justify-content: center;
+}

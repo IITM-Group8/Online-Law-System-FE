@@ -18,20 +18,20 @@ import * as FaIcons from 'react-icons/fa';
 import '../../Styles/dashboardbody.css';
 import * as CommonConstants from '../../Constants/CommonConstants.js'
 
-var columns = [
-    { id: 'ipcSection', label: 'IPC Section', minWidth: 100 },
-    { id: 'caseDescription', label: 'Description', minWidth: 150 },
-    { id: 'caseStatus', label: 'Status', minWidth: 100 },
-    { id: 'createdDate', label: 'Filed Date', minWidth: 100 },
-    { id: 'caseFiles', label: 'Case Files', minWidth: 100 }
-];
-
-const userRole = localStorage.getItem(CommonConstants.USER_ROLE);
-if (userRole === 'Lawyer') {
-    columns.push({ id: 'updateCase', label: 'Update Case', minWidth: 100 });
-}
-
 function CaseDetailsView(props) {
+
+    var columns = [
+        { id: 'ipcSection', label: 'IPC Section', minWidth: 100 },
+        { id: 'caseDescription', label: 'Description', minWidth: 150 },
+        { id: 'caseStatus', label: 'Status', minWidth: 100 },
+        { id: 'createdDate', label: 'Filed Date', minWidth: 100 },
+        { id: 'caseFiles', label: 'Case Files', minWidth: 100 }
+    ]
+    const userRole = localStorage.getItem(CommonConstants.USER_ROLE);
+    if (userRole === 'Lawyer') {
+        columns.push({ id: 'updateCase', label: 'Update Case', minWidth: 100 });
+    }
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -58,6 +58,7 @@ function CaseDetailsView(props) {
     }
 
     var [rows, setRows] = React.useState([]);
+    console.log("rows.length : : : ", rows.length);
     if (rows.length === 0) {
         setRows(props.listOfCaseDetails);
         updateNoOfRows(rows.length);
@@ -78,15 +79,9 @@ function CaseDetailsView(props) {
     const downloadFiles = (files) => {
         var downloadedFiles = [];
         for (let caseFiles of files) {
-            
             //TODO:
             //Currently supporting only text file. Yet to do for the other types of files.
-
-            // let buff = new Buffer(caseFiles.file, 'base64');
-            // let buff = Buffer.from(caseFiles.file, 'base64');
-            // console.log("caseFiles.file ", buff);
             let decode = Base64.decode(caseFiles.file);
-            // let decode = (String.fromCharCode(...new Uint8Array(caseFiles.file)));
             const finalFile = URL.createObjectURL(new Blob([decode], { type: caseFiles.contentType }));
             downloadedFiles.push(finalFile);
         }

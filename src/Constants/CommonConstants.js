@@ -25,8 +25,7 @@ export const FETCH_LAWYER = '/user/lawyers';
 export const FILE_A_CASE_BY_PUBLIC = '/case/public/fileACase';
 export const VIEW_A_CASE_STATUS = '/case/caseDetails';
 export const UPDATE_CASE_STATUS = '/case/caseStatus';
-
-const GENERATE_REPORTS = '/reports/generateReports';
+export const GENERATE_REPORTS = '/reports/generateReport';
 
 export const LIST_OF_MENUS_FOR_ADMIN = [
     {
